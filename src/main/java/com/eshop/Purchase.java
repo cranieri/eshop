@@ -1,13 +1,7 @@
 package com.eshop;
 
-// It's a bad idea to do a switch statement based on an attribute of another object
-// In the case of the switch contained in this class we use the delivery estimate (from the ShippingService class)
-// To calculate the customer charge
-
-// getCharge() uses 2 types of information: the ShippingService delivery estimate (TODAY, NEXT_DAY etc..) and the _item size.
-// Why the _item size to the shipping service rather than the ShippingService delivery estimate to the purchase?
-// Cause we think the delivery estimates can change more frequently
-
+// Move getCustomerPoints to ShippingService class since it calculates the points
+// based on the delivery estimate
 
 public class Purchase {
 	private ShippingService _shippingService;
@@ -39,11 +33,6 @@ public class Purchase {
 	}
 
 	public int getCustomerPoints() {
-		//Add bonus for Today delivery estimate
-		if (getShippingService().getDeliveryEstimate() == ShippingService.TODAY) {
-			return 2;
-		} else {
-			return 1;
-		}
+		return _shippingService.getCustomerPoints();
 	}
 }

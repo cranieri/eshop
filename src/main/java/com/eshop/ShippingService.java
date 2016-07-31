@@ -7,20 +7,20 @@ public class ShippingService {
 
     public ShippingService(int cost, int deliveryEstimate) {
         this.cost = cost;
-        this.deliveryEstimate = deliveryEstimate;
+        this._deliveryEstimate = deliveryEstimate;
     }
 
     private int cost;
 
     public int getDeliveryEstimate() {
-        return deliveryEstimate;
+        return _deliveryEstimate;
     }
 
     public void setDeliveryEstimate(int deliveryEstimate) {
-        this.deliveryEstimate = deliveryEstimate;
+        this._deliveryEstimate = deliveryEstimate;
     }
 
-    private int deliveryEstimate;
+    private int _deliveryEstimate;
 
     public int getCost() {
         return cost;
@@ -48,5 +48,14 @@ public class ShippingService {
 				break;
 		}
 		return result;
+	}
+
+	public int getCustomerPoints() {
+		//Add bonus for Today delivery estimate
+		if (_deliveryEstimate == ShippingService.TODAY) {
+			return 2;
+		} else {
+			return 1;
+		}
 	}
 }
