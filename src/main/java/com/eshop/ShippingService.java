@@ -29,4 +29,24 @@ public class ShippingService {
     public void setCost(int cost) {
         this.cost = cost;
     }
+
+	public double getCharge(int itemSize) {
+		double result = 0;
+		//determine amounts for purchase line
+		switch (getDeliveryEstimate()) {
+			case ShippingService.TODAY:
+				result += 3;
+				if (itemSize == Item.LARGE) {
+					result += 2;
+				}
+				break;
+			case ShippingService.NEXT_DAY:
+				result += 2;
+				break;
+			case ShippingService.REGULAR:
+				result += 1;
+				break;
+		}
+		return result;
+	}
 }

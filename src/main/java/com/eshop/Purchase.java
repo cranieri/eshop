@@ -1,48 +1,41 @@
 package com.eshop;
 
+// It's a bad idea to do a switch statement based on an attribute of another object
+// In the case of the switch contained in this class we use the delivery estimate (from the ShippingService class)
+// To calculate the customer charge
+
+// getCharge() uses 2 types of information: the ShippingService delivery estimate (TODAY, NEXT_DAY etc..) and the _item size.
+// Why the _item size to the shipping service rather than the ShippingService delivery estimate to the purchase?
+// Cause we think the delivery estimates can change more frequently
+
+
 public class Purchase {
-	private ShippingService shippingService;
-	private Item item;
+	private ShippingService _shippingService;
+	private Item _item;
 
 	public Purchase(ShippingService shippingService, Item item) {
-		this.shippingService = shippingService;
-		this.item = item;
+		this._shippingService = shippingService;
+		this._item = item;
 	}
 
 	public ShippingService getShippingService() {
-		return shippingService;
+		return _shippingService;
 	}
 
 	public void setShippingService(ShippingService shippingService) {
-		this.shippingService = shippingService;
+		_shippingService = shippingService;
 	}
 
 	public Item getItem() {
-		return item;
+		return _item;
 	}
 
 	public void setItem(Item item) {
-		this.item = item;
+		_item = item;
 	}
 
 	public double getCharge() {
-		double result = 0;
-		//determine amounts for purchase line
-		switch (getShippingService().getDeliveryEstimate()) {
-			case ShippingService.TODAY:
-				result += 3;
-				if (getItem().getSize() == Item.LARGE) {
-					result += 2;
-				}
-				break;
-			case ShippingService.NEXT_DAY:
-				result += 2;
-				break;
-			case ShippingService.REGULAR:
-				result += 1;
-				break;
-		}
-		return result;
+		return _shippingService.getCharge(_item.getSize());
 	}
 
 	public int getCustomerPoints() {
