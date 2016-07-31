@@ -1,7 +1,8 @@
 package com.eshop;
 
 /**
- * Created by cosimoranieri on 30/07/2016.
+ * The amountFor method in the Customer class doesn't use anything of the Customer class.
+ * We then us the MOVE METHOD technique to move the amountFor method to the Purchase class, since it uses data from this class.
  */
 public class Purchase {
     private ShippingService shippingService;
@@ -27,4 +28,24 @@ public class Purchase {
     public void setItem(Item item) {
         this.item = item;
     }
+
+	public double amountFor(Purchase purchase) {
+		double result = 0;
+		//determine amounts for purchase line
+		switch (purchase.getShippingService().getDeliveryEstimate()) {
+			case ShippingService.TODAY:
+				result += 3;
+				if (purchase.getItem().getSize() == Item.LARGE) {
+					result += 2;
+				}
+				break;
+			case ShippingService.NEXT_DAY:
+				result += 2;
+				break;
+			case ShippingService.REGULAR:
+				result += 1;
+				break;
+		}
+		return result;
+	}
 }

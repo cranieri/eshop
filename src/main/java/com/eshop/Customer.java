@@ -32,44 +32,24 @@ public class Customer {
         Enumeration purchases = _purchases.elements();
         String result = "Purchase Record for " + getName() + "\n";
         while (purchases.hasMoreElements()) {
-            Purchase each = (Purchase) purchases.nextElement();
-			double thisAmount = amountFor(each);
+            Purchase purchase = (Purchase) purchases.nextElement();
+			double thisAmount = purchase.amountFor(purchase);
 
             //Add customer points
             customerPoints++;
 
             //Add bonus for Today delivery estimate
-            if (each.getShippingService().getDeliveryEstimate() == ShippingService.TODAY) {
+            if (purchase.getShippingService().getDeliveryEstimate() == ShippingService.TODAY) {
                 customerPoints++;
             }
 
             //Show figures for this purchase
-            result += "\t" + each.getItem().getName() + "\t" + each.getItem().getPrice() + "\n";
-            totalAmount += each.getItem().getPrice() + thisAmount;
+            result += "\t" + purchase.getItem().getName() + "\t" + purchase.getItem().getPrice() + "\n";
+            totalAmount += purchase.getItem().getPrice() + thisAmount;
         }
         result += "Amount owed is " + totalAmount + "\n";
         result += "You earned " + customerPoints + " customer points";
 
         return result;
     }
-
-	private double amountFor(Purchase purchase) {
-		double result = 0;
-		//determine amounts for purchase line
-		switch (purchase.getShippingService().getDeliveryEstimate()) {
-			case ShippingService.TODAY:
-				result += 3;
-				if (purchase.getItem().getSize() == Item.LARGE) {
-					result += 2;
-				}
-				break;
-			case ShippingService.NEXT_DAY:
-				result += 2;
-				break;
-			case ShippingService.REGULAR:
-				result += 1;
-				break;
-		}
-		return result;
-	}
 }
