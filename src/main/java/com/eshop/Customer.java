@@ -33,7 +33,7 @@ public class Customer {
         String result = "Purchase Record for " + getName() + "\n";
         while (purchases.hasMoreElements()) {
             Purchase purchase = (Purchase) purchases.nextElement();
-			double thisAmount = purchase.amountFor(purchase);
+			double thisAmount = purchase.charge();
 
             //Add customer points
             customerPoints++;
