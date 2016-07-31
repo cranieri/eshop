@@ -1,16 +1,23 @@
 package com.eshop;
 
+// To introduce the strategy patter I'll use 3 refactorings:
+// Replace type code with strategy
+// Move method to move getCharge to the PriceCalculator class
+// Replace Conditional with polymorphism
+
 public class ShippingService {
     public static final int TODAY = 1;
     public static final int NEXT_DAY = 2;
     public static final int REGULAR = 3;
 
-    public ShippingService(int cost, int deliveryEstimate) {
-        this.cost = cost;
-        this._deliveryEstimate = deliveryEstimate;
+    public ShippingService(int cost, int deliveryEstimate, ChargeCalculator chargeCalculator) {
+        _cost = cost;
+        _deliveryEstimate = deliveryEstimate;
+		_chargeCalculator = chargeCalculator;
+
     }
 
-    private int cost;
+    private int _cost;
 
     public int getDeliveryEstimate() {
         return _deliveryEstimate;
@@ -22,32 +29,26 @@ public class ShippingService {
 
     private int _deliveryEstimate;
 
+	public ChargeCalculator getChargeCalculator() {
+		return _chargeCalculator;
+	}
+
+	public void setChargeCalculator(ChargeCalculator chargeCalculator) {
+		_chargeCalculator = chargeCalculator;
+	}
+
+	private ChargeCalculator _chargeCalculator;
+
     public int getCost() {
-        return cost;
+        return _cost;
     }
 
     public void setCost(int cost) {
-        this.cost = cost;
+        this._cost = cost;
     }
 
 	public double getCharge(int itemSize) {
-		double result = 0;
-		//determine amounts for purchase line
-		switch (getDeliveryEstimate()) {
-			case ShippingService.TODAY:
-				result += 3;
-				if (itemSize == Item.LARGE) {
-					result += 2;
-				}
-				break;
-			case ShippingService.NEXT_DAY:
-				result += 2;
-				break;
-			case ShippingService.REGULAR:
-				result += 1;
-				break;
-		}
-		return result;
+		return _chargeCalculator.getCharge(itemSize, getDeliveryEstimate());
 	}
 
 	public int getCustomerPoints() {

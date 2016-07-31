@@ -3,7 +3,7 @@ package com.eshop;
 public class CustomerTest {
     public static void main (String[] args) {
         Item item = new Item("pen", 10, Item.LARGE);
-        ShippingService shippingServiceToday = new ShippingService(10, ShippingService.TODAY);
+        ShippingService shippingServiceToday = new ShippingService(10, ShippingService.TODAY, new ChargeCalculator());
         Purchase purchase = new Purchase(shippingServiceToday, item);
 
         Customer customer = new Customer("cosimo");
