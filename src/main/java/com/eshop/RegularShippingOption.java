@@ -1,6 +1,6 @@
 package com.eshop;
 
-public class RegularDeliveryEstimate extends DeliveryEstimate {
+public class RegularShippingOption extends ShippingOption {
 
 	public double getCharge(int itemSize) {
 		double result = 0;

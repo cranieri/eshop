@@ -3,7 +3,7 @@ package com.eshop;
 /**
  * Created by cranieri on 31/07/2016.
  */
-public class NextDayDeliveryEstimate extends DeliveryEstimate {
+public class NextDayShippingOption extends ShippingOption {
 
 	public double getCharge(int itemSize) {
 		double result = 0;

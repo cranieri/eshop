@@ -6,25 +6,23 @@ package com.eshop;
 // Replace Conditional with polymorphism
 
 public class ShippingService {
-    public ShippingService(int cost, DeliveryEstimate chargeCalculator) {
+    public ShippingService(int cost, ShippingOption deliveryEstimate) {
         _cost = cost;
-		_chargeCalculator = chargeCalculator;
+		_deliveryEstimate = deliveryEstimate;
 
     }
 
     private int _cost;
 
-    private int _deliveryEstimate;
-
-	public DeliveryEstimate getChargeCalculator() {
-		return _chargeCalculator;
+	public ShippingOption getDeliveryEstimate() {
+		return _deliveryEstimate;
 	}
 
-	public void setChargeCalculator(DeliveryEstimate chargeCalculator) {
-		_chargeCalculator = chargeCalculator;
+	public void setDeliveryEstimate(ShippingOption deliveryEstimate) {
+		_deliveryEstimate = deliveryEstimate;
 	}
 
-	private DeliveryEstimate _chargeCalculator;
+	private ShippingOption _deliveryEstimate;
 
     public int getCost() {
         return _cost;
@@ -35,10 +33,10 @@ public class ShippingService {
     }
 
 	public double getCharge(int itemSize) {
-		return _chargeCalculator.getCharge(itemSize);
+		return _deliveryEstimate.getCharge(itemSize);
 	}
 
 	public int getShippingPoints(int itemSize) {
-		return _chargeCalculator.getShippingPoints(itemSize);
+		return _deliveryEstimate.getShippingPoints(itemSize);
 	}
 }
