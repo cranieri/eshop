@@ -3,9 +3,9 @@ package com.eshop;
 import java.util.Enumeration;
 import java.util.Vector;
 
-/**
- * Created by cosimoranieri on 30/07/2016.
- */
+// We extract the switch/case snippet into a separate method following the EXTRACT METHOD technique.
+// We first see what are the local variables in scope of the snippet we are extracting.
+// And then we pass as parameter the variable the doesn't change and we initialize and change thisAmount in the new method
 public class Customer {
     private String name;
     private Vector _purchases = new Vector();
@@ -32,23 +32,9 @@ public class Customer {
         Enumeration purchases = _purchases.elements();
         String result = "Purchase Record for " + getName() + "\n";
         while (purchases.hasMoreElements()) {
-            double thisAmount = 0;
             Purchase each = (Purchase) purchases.nextElement();
-            //determine amounts for each line
-            switch (each.getShippingService().getDeliveryEstimate()) {
-                case ShippingService.TODAY:
-                    thisAmount += 3;
-                    if (each.getItem().getSize() == Item.LARGE) {
-                        thisAmount += 2;
-                    }
-                    break;
-                case ShippingService.NEXT_DAY:
-                    thisAmount += 2;
-                    break;
-                case ShippingService.REGULAR:
-                    thisAmount += 1;
-                    break;
-            }
+			double thisAmount = amountFor(each);
+
             //Add customer points
             customerPoints++;
 
@@ -66,4 +52,24 @@ public class Customer {
 
         return result;
     }
+
+	private double amountFor(Purchase each) {
+		double thisAmount = 0;
+		//determine amounts for each line
+		switch (each.getShippingService().getDeliveryEstimate()) {
+			case ShippingService.TODAY:
+				thisAmount += 3;
+				if (each.getItem().getSize() == Item.LARGE) {
+					thisAmount += 2;
+				}
+				break;
+			case ShippingService.NEXT_DAY:
+				thisAmount += 2;
+				break;
+			case ShippingService.REGULAR:
+				thisAmount += 1;
+				break;
+		}
+		return thisAmount;
+	}
 }

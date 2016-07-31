@@ -1,14 +1,5 @@
 package com.eshop;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import com.eshop.Customer;
-
-
-/**
- * Created by cosimoranieri on 30/07/2016.
- */
-
 public class CustomerTest {
     public static void main (String[] args) {
         Item item = new Item("pen", 10, Item.LARGE);
