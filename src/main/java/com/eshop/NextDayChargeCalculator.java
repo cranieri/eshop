@@ -5,7 +5,11 @@ package com.eshop;
  */
 public class NextDayChargeCalculator extends ChargeCalculator {
 
-	public double getCharge(int itemSize, int deliveryEstimate) {
+	public double getCharge(int itemSize) {
 		return 2;
+	}
+
+	public int getCustomerPoints() {
+		return 1;
 	}
 }

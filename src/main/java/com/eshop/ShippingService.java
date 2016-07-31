@@ -6,26 +6,13 @@ package com.eshop;
 // Replace Conditional with polymorphism
 
 public class ShippingService {
-    public static final int TODAY = 1;
-    public static final int NEXT_DAY = 2;
-    public static final int REGULAR = 3;
-
-    public ShippingService(int cost, int deliveryEstimate, ChargeCalculator chargeCalculator) {
+    public ShippingService(int cost, ChargeCalculator chargeCalculator) {
         _cost = cost;
-        _deliveryEstimate = deliveryEstimate;
 		_chargeCalculator = chargeCalculator;
 
     }
 
     private int _cost;
-
-    public int getDeliveryEstimate() {
-        return _deliveryEstimate;
-    }
-
-    public void setDeliveryEstimate(int deliveryEstimate) {
-        this._deliveryEstimate = deliveryEstimate;
-    }
 
     private int _deliveryEstimate;
 
@@ -48,15 +35,10 @@ public class ShippingService {
     }
 
 	public double getCharge(int itemSize) {
-		return _chargeCalculator.getCharge(itemSize, getDeliveryEstimate());
+		return _chargeCalculator.getCharge(itemSize);
 	}
 
 	public int getCustomerPoints() {
-		//Add bonus for Today delivery estimate
-		if (_deliveryEstimate == ShippingService.TODAY) {
-			return 2;
-		} else {
-			return 1;
-		}
+		return _chargeCalculator.getCustomerPoints();
 	}
 }
