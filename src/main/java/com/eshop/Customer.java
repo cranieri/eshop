@@ -53,23 +53,23 @@ public class Customer {
         return result;
     }
 
-	private double amountFor(Purchase each) {
-		double thisAmount = 0;
-		//determine amounts for each line
-		switch (each.getShippingService().getDeliveryEstimate()) {
+	private double amountFor(Purchase purchase) {
+		double result = 0;
+		//determine amounts for purchase line
+		switch (purchase.getShippingService().getDeliveryEstimate()) {
 			case ShippingService.TODAY:
-				thisAmount += 3;
-				if (each.getItem().getSize() == Item.LARGE) {
-					thisAmount += 2;
+				result += 3;
+				if (purchase.getItem().getSize() == Item.LARGE) {
+					result += 2;
 				}
 				break;
 			case ShippingService.NEXT_DAY:
-				thisAmount += 2;
+				result += 2;
 				break;
 			case ShippingService.REGULAR:
-				thisAmount += 1;
+				result += 1;
 				break;
 		}
-		return thisAmount;
+		return result;
 	}
 }
