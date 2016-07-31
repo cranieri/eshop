@@ -3,7 +3,7 @@ package com.eshop;
 import java.util.Enumeration;
 import java.util.Vector;
 
-// Extract customerPoints calculation into a separate method: getCustomerPoints
+// Extract customerPoints calculation into a separate method: getShippingPoints
 
 public class Customer {
 	private String name;

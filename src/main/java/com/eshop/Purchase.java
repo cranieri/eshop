@@ -1,6 +1,6 @@
 package com.eshop;
 
-// Move getCustomerPoints to ShippingService class since it calculates the points
+// Move getShippingPoints to ShippingService class since it calculates the points
 // based on the delivery estimate
 
 public class Purchase {
@@ -33,6 +33,6 @@ public class Purchase {
 	}
 
 	public int getCustomerPoints() {
-		return _shippingService.getCustomerPoints();
+		return _shippingService.getShippingPoints(_item.getSize());
 	}
 }
