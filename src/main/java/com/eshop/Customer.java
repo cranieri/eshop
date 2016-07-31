@@ -3,9 +3,8 @@ package com.eshop;
 import java.util.Enumeration;
 import java.util.Vector;
 
-// We use EXTRACT METHOD to extract the customerPoints logic.
-// We look at the locally scoped variables and we see we can pass the purchase variable
-// And we can use an appending assignment to set the customer points
+// Extract totalAmount calculation into a separate method and use
+
 public class Customer {
 	private String name;
 	private Vector _purchases = new Vector();
@@ -27,7 +26,6 @@ public class Customer {
 	}
 
 	public String statement() {
-		double totalAmount = 0;
 		int customerPoints = 0;
 		Enumeration purchases = _purchases.elements();
 		String result = "Purchase Record for " + getName() + "\n";
@@ -39,11 +37,20 @@ public class Customer {
 
 			//Show figures for this purchase
 			result += "\t" + purchase.getItem().getName() + "\t" + purchase.getItem().getPrice() + "\n";
-			totalAmount += purchase.getItem().getPrice() + purchase.getCharge();
 		}
-		result += "Amount owed is " + totalAmount + "\n";
+		result += "Amount owed is " + getTotalCharge() + "\n";
 		result += "You earned " + customerPoints + " customer points";
 
 		return result;
+	}
+
+	private double getTotalCharge() {
+		double totalAmount = 0;
+		Enumeration purchases = _purchases.elements();
+		while (purchases.hasMoreElements()) {
+			Purchase purchase = (Purchase) purchases.nextElement();
+			totalAmount += purchase.getItem().getPrice() + purchase.getCharge();
+		}
+		return totalAmount;
 	}
 }
