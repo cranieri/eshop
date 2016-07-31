@@ -3,7 +3,7 @@ package com.eshop;
 import java.util.Enumeration;
 import java.util.Vector;
 
-// Extract totalAmount calculation into a separate method and use
+// Extract customerPoints calculation into a separate method: getCustomerPoints
 
 public class Customer {
 	private String name;
@@ -26,20 +26,15 @@ public class Customer {
 	}
 
 	public String statement() {
-		int customerPoints = 0;
 		Enumeration purchases = _purchases.elements();
 		String result = "Purchase Record for " + getName() + "\n";
 		while (purchases.hasMoreElements()) {
 			Purchase purchase = (Purchase) purchases.nextElement();
-
-			//Add customer points
-			customerPoints += purchase.getCustomerPoints();
-
 			//Show figures for this purchase
 			result += "\t" + purchase.getItem().getName() + "\t" + purchase.getItem().getPrice() + "\n";
 		}
 		result += "Amount owed is " + getTotalCharge() + "\n";
-		result += "You earned " + customerPoints + " customer points";
+		result += "You earned " + getCustomerPoints() + " customer points";
 
 		return result;
 	}
@@ -52,5 +47,15 @@ public class Customer {
 			totalAmount += purchase.getItem().getPrice() + purchase.getCharge();
 		}
 		return totalAmount;
+	}
+
+	private int getCustomerPoints() {
+		int customerPoints = 0;
+		Enumeration purchases = _purchases.elements();
+		while (purchases.hasMoreElements()) {
+			Purchase purchase = (Purchase) purchases.nextElement();
+			customerPoints += purchase.getCustomerPoints();
+		}
+		return customerPoints;
 	}
 }
