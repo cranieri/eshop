@@ -4,35 +4,35 @@ package com.eshop;
 // based on the delivery estimate
 
 public class Purchase {
-	private ShippingService _shippingService;
-	private Item _item;
+	private ShippingService shippingService;
+	private Item item;
 
 	public Purchase(ShippingService shippingService, Item item) {
-		this._shippingService = shippingService;
-		this._item = item;
+		this.shippingService = shippingService;
+		this.item = item;
 	}
 
 	public ShippingService getShippingService() {
-		return _shippingService;
+		return shippingService;
 	}
 
 	public void setShippingService(ShippingService shippingService) {
-		_shippingService = shippingService;
+		this.shippingService = shippingService;
 	}
 
 	public Item getItem() {
-		return _item;
+		return item;
 	}
 
 	public void setItem(Item item) {
-		_item = item;
+		this.item = item;
 	}
 
 	public double getCharge() {
-		return _shippingService.getCharge(_item.getSize());
+		return shippingService.getCharge(item.getSize());
 	}
 
 	public int getCustomerPoints() {
-		return _shippingService.getShippingPoints(_item.getSize());
+		return shippingService.getShippingPoints(item.getSize());
 	}
 }

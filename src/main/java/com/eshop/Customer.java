@@ -7,14 +7,14 @@ import java.util.Vector;
 
 public class Customer {
 	private String name;
-	private Vector _purchases = new Vector();
+	private Vector purchases = new Vector();
 
 	public Customer(String name) {
 		this.name = name;
 	}
 
 	public void addPurchases(Purchase purchase) {
-		_purchases.add(purchase);
+		purchases.add(purchase);
 	}
 
 	public String getName() {
@@ -26,7 +26,7 @@ public class Customer {
 	}
 
 	public String statement() {
-		Enumeration purchases = _purchases.elements();
+		Enumeration purchases = this.purchases.elements();
 		String result = "Purchase Record for " + getName() + "\n";
 		while (purchases.hasMoreElements()) {
 			Purchase purchase = (Purchase) purchases.nextElement();
@@ -41,7 +41,7 @@ public class Customer {
 
 	private double getTotalCharge() {
 		double totalAmount = 0;
-		Enumeration purchases = _purchases.elements();
+		Enumeration purchases = this.purchases.elements();
 		while (purchases.hasMoreElements()) {
 			Purchase purchase = (Purchase) purchases.nextElement();
 			totalAmount += purchase.getItem().getPrice() + purchase.getCharge();
@@ -51,7 +51,7 @@ public class Customer {
 
 	private int getCustomerPoints() {
 		int customerPoints = 0;
-		Enumeration purchases = _purchases.elements();
+		Enumeration purchases = this.purchases.elements();
 		while (purchases.hasMoreElements()) {
 			Purchase purchase = (Purchase) purchases.nextElement();
 			customerPoints += purchase.getCustomerPoints();
