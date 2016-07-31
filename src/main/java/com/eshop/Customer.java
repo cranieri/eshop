@@ -3,9 +3,6 @@ package com.eshop;
 import java.util.Enumeration;
 import java.util.Vector;
 
-// We extract the switch/case snippet into a separate method following the EXTRACT METHOD technique.
-// We first see what are the local variables in scope of the snippet we are extracting.
-// And then we pass as parameter the variable the doesn't change and we initialize and change thisAmount in the new method
 public class Customer {
     private String name;
     private Vector _purchases = new Vector();
@@ -33,7 +30,7 @@ public class Customer {
         String result = "Purchase Record for " + getName() + "\n";
         while (purchases.hasMoreElements()) {
             Purchase purchase = (Purchase) purchases.nextElement();
-			double thisAmount = purchase.charge();
+			double thisAmount = purchase.getCharge();
 
             //Add customer points
             customerPoints++;

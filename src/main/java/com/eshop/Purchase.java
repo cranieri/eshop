@@ -1,8 +1,8 @@
 package com.eshop;
 
 /**
- * The charge method in the Customer class doesn't use anything of the Customer class.
- * We then us the MOVE METHOD technique to move the charge method to the Purchase class, since it uses data from this class.
+ * The getCharge method in the Customer class doesn't use anything of the Customer class.
+ * We then us the MOVE METHOD technique to move the getCharge method to the Purchase class, since it uses data from this class.
  */
 public class Purchase {
     private ShippingService shippingService;
@@ -29,7 +29,7 @@ public class Purchase {
         this.item = item;
     }
 
-	public double charge() {
+	public double getCharge() {
 		double result = 0;
 		//determine amounts for purchase line
 		switch (getShippingService().getDeliveryEstimate()) {
